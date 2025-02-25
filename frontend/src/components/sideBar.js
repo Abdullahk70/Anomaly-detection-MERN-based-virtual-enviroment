@@ -3,138 +3,54 @@ import { Link, useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import UploadIcon from "@mui/icons-material/CloudUpload";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
 import TuneIcon from "@mui/icons-material/Tune";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import PlaceIcon from "@mui/icons-material/Place";
-import SyncIcon from "@mui/icons-material/Sync";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 const Sidebar = () => {
-  const location = useLocation(); // Get the current location (route)
+  const location = useLocation();
 
   const menuItems = [
     { icon: <HomeIcon fontSize="small" />, label: "Home", link: "/" },
-    {
-      icon: <UploadIcon fontSize="small" />,
-      label: "Data Upload",
-      link: "/upload",
-    },
-    {
-      icon: <TuneIcon fontSize="small" />,
-      label: "Normalization/Sc",
-      link: "/normalization",
-    },
-    {
-      icon: <PlaceIcon fontSize="small" />,
-      label: "Feature Selection",
-      link: "/feature-selection",
-    },
-    {
-      icon: <SyncIcon fontSize="small" />,
-      label: "Encoding",
-      link: "/encoding",
-    },
-  ];
-
-  const transformationItems = [
-    {
-      icon: <VisibilityIcon fontSize="small" />,
-      label: "Outlier Detection",
-      link: "/outlier-detection",
-    },
-    {
-      icon: <VisibilityIcon fontSize="small" />,
-      label: "Visualization",
-      link: "/visualization",
-    },
-    // { icon: <SyncIcon fontSize="small" />, label: "Data Splitting", link: "/data-splitting" },
-    {
-      icon: <FileDownloadIcon fontSize="small" />,
-      label: "Export Data",
-      link: "/export-data",
-    },
-    {
-      icon: <FileDownloadIcon fontSize="small" />,
-      label: "Display Csv",
-      link: "/csv-display",
-    },
+    { icon: <UploadIcon fontSize="small" />, label: "Data Upload", link: "/upload" },
+    { icon: <TuneIcon fontSize="small" />, label: "Visualize Results", link: "/normalization" },
   ];
 
   return (
-    <div className="h-screen w-56 bg-gray-200 shadow-lg flex flex-col justify-between sticky top-0">
+    <div className="h-screen w-64 bg-gradient-to-b from-gray-900 to-gray-800 shadow-2xl flex flex-col justify-between sticky top-0 transform transition-all duration-500">
       {/* Top Section */}
       <div>
         <Link to="../">
-          <h1 className="text-xl font-extrabold px-3 py-2 text-center mt-3 mb-2 text-sm">
-            FeatureENGR
+          <h1 className="text-2xl font-extrabold px-4 py-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hover:from-pink-600 hover:to-purple-400 transition-all duration-500">
+            AnomalyDetector
           </h1>
         </Link>
 
         {/* Main Menu */}
-        <div>
+        <div className="px-2 space-y-1">
           {menuItems.map((item, index) => (
-          <Link
-          key={index}
-          to={item.link}
-          className={`flex items-center gap-2 px-2 py-1 w-full text-left text-xs transition-all duration-300 ease-in-out transform ${
-            location.pathname === item.link
-              ? "bg-white shadow-md rounded-full scale-105"
-              : "hover:bg-gray-200 hover:scale-100"
-          }`}
-        >
-          <div
-            className={`w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300 ease-in-out transform ${
-              location.pathname === item.link ? "bg-gray-300 scale-110" : "bg-white"
-            }`}
-          >
-            <span className="text-gray-700">{item.icon}</span>
-          </div>
-          <span
-            className={`transition-all duration-300 ${
-              location.pathname === item.link
-                ? "font-bold text-gray-800"
-                : "text-gray-600"
-            }`}
-          >
-            {item.label}
-          </span>
-        </Link>
-        
-          ))}
-        </div>
-
-        {/* Divider Line before Transformation */}
-        <div className="border-t border-gray-300 mx-3 my-2" />
-
-        {/* Transformation Section */}
-        <h2 className="px-3 mt-3 text-gray-600 text-xs uppercase tracking-wide">
-          Transformation
-        </h2>
-        <div>
-          {transformationItems.map((item, index) => (
             <Link
               key={index}
               to={item.link}
-              className={`flex items-center gap-2 px-2 py-1 w-full text-left text-xs ${
+              className={`flex items-center gap-3 px-4 py-3 w-full text-left text-sm transition-all duration-300 ease-in-out transform hover:scale-105 ${
                 location.pathname === item.link
-                  ? "bg-white shadow-md rounded-full transition-all duration-300 ease-in-out"
-                  : "hover:bg-gray-200"
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg rounded-xl"
+                  : "hover:bg-gray-700 hover:bg-opacity-50 rounded-xl"
               }`}
             >
               <div
-                className={`w-6 h-6 flex items-center justify-center rounded-full ${
-                  location.pathname === item.link ? "bg-gray-300" : "bg-white"
+                className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300 ${
+                  location.pathname === item.link
+                    ? "bg-white bg-opacity-20"
+                    : "bg-gray-800"
                 }`}
               >
-                <span className="text-gray-700">{item.icon}</span>
+                <span className="text-white">{item.icon}</span>
               </div>
               <span
-                className={`${
+                className={`transition-all duration-300 ${
                   location.pathname === item.link
-                    ? "font-bold"
-                    : "text-gray-600"
-                } text-xs`}
+                    ? "font-bold text-white"
+                    : "text-gray-300"
+                }`}
               >
                 {item.label}
               </span>
@@ -143,56 +59,30 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Bottom Section - User Info */}
-      <div className="px-3 py-2 mt-2">
-        <div className="flex items-center gap-2 bg-white p-2 rounded-full shadow-md">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="Profile"
-            className="w-8 h-8 rounded-full"
-          />
-          <div>
-            <p className="text-gray-800 text-xs font-medium">M Abdullah</p>
-            <p className="text-gray-600 text-xs">abdullah@gmail.com</p>
-          </div>
-        </div>
+      {/* Bottom Section */}
+      <div className="px-4 py-4">
+        <div className="border-t border-gray-700 mx-4 my-4" />
 
-        <div className="border-t border-gray-300 mx-3 mt-3" />
-
-        <div className="mt-2">
+        <div className="space-y-2">
           <button
             onClick={() => alert("Settings Clicked")}
-            className="flex items-center gap-2 px-2 py-1 w-full text-left text-xs hover:bg-gray-200"
+            className="flex items-center gap-3 px-4 py-3 w-full text-left text-sm transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-700 hover:bg-opacity-50 rounded-xl"
           >
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <SettingsIcon className="text-gray-700" />
+            <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800">
+              <SettingsIcon className="text-white" />
             </div>
-            <span className="text-gray-600 text-xs">Settings</span>
+            <span className="text-gray-300">Settings</span>
           </button>
 
-
-        
-          <button
-            onClick={() => alert("Logout Clicked")}
-            className="flex items-center gap-2 px-2 py-1 w-full text-left text-xs hover:bg-gray-200"
-          >
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <LogoutIcon className="text-gray-700" />
-            </div>
-            <span className="text-gray-600 text-xs">Log Out</span>
-          </button>
+          <Link to="/faq">
+            <button className="flex items-center gap-3 px-4 py-3 w-full text-left text-sm transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-700 hover:bg-opacity-50 rounded-xl">
+              <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800">
+                <TuneIcon className="text-white" />
+              </div>
+              <span className="text-gray-300">FAQ's</span>
+            </button>
+          </Link>
         </div>
-        <Link to="/faq">
-         <button
-            
-            className="flex items-center gap-2 px-2 py-1 w-full text-left text-xs hover:bg-gray-200"
-          >
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <TuneIcon className="text-gray-700" />
-            </div>
-            <span className="text-gray-600 text-xs">FAQ's</span>
-          </button>
-         </Link>
       </div>
     </div>
   );
